@@ -3,6 +3,8 @@ Redactor Styles for Craft
 
 This plugin is a Craft wrapper for the [Styles Redactor plugin by JP Devries](https://github.com/jpdevries/styles).
 
+![Redactor Styles](https://www.modmore.com/assets/uploads/redactor_custom_styles.png)
+
 
 Usage
 ---
