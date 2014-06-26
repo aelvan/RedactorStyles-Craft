@@ -40,6 +40,8 @@ control panel. Could be somthing like this:
     
     .redactor_dropdown .redactor-indented-text, 
     .redactor_editor .indented-text { text-indent: 3em; }
+    
+You can alternatively specify an external file for your CSS in the 'Styles CSS File' input field. This needs to be a public path above your web root, so `/css/redactorStyles.css` for example. You can also use `{siteUrl}css/redactorStyles.css` if you are using Craft's [Environment-Specific Variables](http://buildwithcraft.com/docs/multi-environment-configs#environment-specific-variables).
 
 This CSS will be added to the control panel, so you can basicly restyle anything by putting in the necessary styles 
 here. Staying within the Redactor area, here's how to add more bottom margin to the p tag, and add some other styling 
@@ -99,6 +101,11 @@ Todo/plans
 
 
 Changelog
+---
+### Version 0.2
+ - Add ability to use an external css file.
+ - 
+ 
 ---
 ### Version 0.1
  - Initial public release
