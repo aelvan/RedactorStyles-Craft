@@ -16,7 +16,7 @@ class RedactorStylesPlugin extends BasePlugin
 
 	public function getVersion()
 	{
-		return '0.1';
+		return '0.2';
 	}
 
 	public function getDeveloper()
@@ -45,18 +45,23 @@ class RedactorStylesPlugin extends BasePlugin
       if ($stylesCss!='') {
 			  craft()->templates->includeCss($stylesCss);
       }
+	  
+	  if (trim($settings->redactorStylesCssFile)) {
+            $filepath = craft()->config->parseEnvironmentString($settings->redactorStylesCssFile);
+            craft()->templates->includeCssFile($filepath);
+        }
       
 			craft()->templates->includeCssResource('redactorstyles/styles.css');
 			craft()->templates->includeJsResource('redactorstyles/styles.js');
 		}
 	}
 
-
 	protected function defineSettings()
 	{
     return array(
        'redactorStylesJson' => array(AttributeType::String, 'default' => ''),
        'redactorStylesCss' => array(AttributeType::String, 'default' => ''),
+	   'redactorStylesCssFile' => array(AttributeType::String, 'default' => ''),
     );
 	}
   
@@ -65,6 +70,7 @@ class RedactorStylesPlugin extends BasePlugin
     $config_settings = array();
     $config_settings['redactorStylesJson'] = craft()->config->get('redactorStylesJson');
     $config_settings['redactorStylesCss'] = craft()->config->get('redactorStylesCss');
+	$config_settings['redactorStylesCssFile'] = craft()->config->get('redactorStylesCssFile');
     
     return craft()->templates->render('redactorstyles/settings', array(
       'settings' => $this->getSettings()
