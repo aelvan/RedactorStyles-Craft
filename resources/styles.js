@@ -26,7 +26,6 @@ RedactorPlugins.styles = function () {
 				}
 			};
 			
-			console.log(dropdown);
 			var button = this.button.add('styles', 'Styles');
 			this.button.setAwesome('styles', 'fa-list-alt');
 			this.button.addDropdown(button, dropdown);
