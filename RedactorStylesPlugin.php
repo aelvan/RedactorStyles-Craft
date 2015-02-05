@@ -3,8 +3,8 @@ namespace Craft;
 
 /**
  * Redactor Styles plugin
- * 
- * 
+ *
+ *
  * @author André Elvan
  */
 class RedactorStylesPlugin extends BasePlugin
@@ -16,7 +16,7 @@ class RedactorStylesPlugin extends BasePlugin
 
 	public function getVersion()
 	{
-		return '0.2';
+		return '0.3';
 	}
 
 	public function getDeveloper()
@@ -31,26 +31,26 @@ class RedactorStylesPlugin extends BasePlugin
 
 	public function init()
 	{
-		if (craft()->request->isCpRequest())
-		{
-      $settings = $this->getSettings();
-      
-      $stylesJson = $settings['redactorStylesJson'];
+		if (craft()->request->isCpRequest()) {
+			$settings = $this->getSettings();
 
-      if ($stylesJson!='') {
-			  craft()->templates->includeJs('var RedactorStyles = {}; RedactorStyles.stylesJson = ' . $stylesJson . ';');
-      }
-      
-      $stylesCss = $settings['redactorStylesCss'];
-      if ($stylesCss!='') {
-			  craft()->templates->includeCss($stylesCss);
-      }
-	  
-	  if (trim($settings->redactorStylesCssFile)) {
-            $filepath = craft()->config->parseEnvironmentString($settings->redactorStylesCssFile);
-            craft()->templates->includeCssFile($filepath);
-        }
-      
+			$stylesJson = $settings['redactorStylesJson'];
+
+			if ($stylesJson != '') {
+				craft()->templates->includeJs('var RedactorStyles = {}; RedactorStyles.stylesJson = ' . $stylesJson . ';');
+			}
+
+			$stylesCss = $settings['redactorStylesCss'];
+			if ($stylesCss != '') {
+				craft()->templates->includeCss($stylesCss);
+			}
+
+			if (trim($settings->redactorStylesCssFile)) {
+				$filepath = craft()->config->parseEnvironmentString($settings->redactorStylesCssFile);
+				craft()->templates->includeCssFile($filepath);
+			}
+
+			craft()->templates->includeCssResource('redactorstyles/fontawesome/css/font-awesome.min.css');
 			craft()->templates->includeCssResource('redactorstyles/styles.css');
 			craft()->templates->includeJsResource('redactorstyles/styles.js');
 		}
@@ -58,23 +58,23 @@ class RedactorStylesPlugin extends BasePlugin
 
 	protected function defineSettings()
 	{
-    return array(
-       'redactorStylesJson' => array(AttributeType::String, 'default' => ''),
-       'redactorStylesCss' => array(AttributeType::String, 'default' => ''),
-	   'redactorStylesCssFile' => array(AttributeType::String, 'default' => ''),
-    );
+		return array(
+			'redactorStylesJson' => array(AttributeType::String, 'default' => ''),
+			'redactorStylesCss' => array(AttributeType::String, 'default' => ''),
+			'redactorStylesCssFile' => array(AttributeType::String, 'default' => ''),
+		);
 	}
-  
-  public function getSettingsHtml()
-  {
-    $config_settings = array();
-    $config_settings['redactorStylesJson'] = craft()->config->get('redactorStylesJson');
-    $config_settings['redactorStylesCss'] = craft()->config->get('redactorStylesCss');
-	$config_settings['redactorStylesCssFile'] = craft()->config->get('redactorStylesCssFile');
-    
-    return craft()->templates->render('redactorstyles/settings', array(
-      'settings' => $this->getSettings()
-    ));
-  }
-  
+
+	public function getSettingsHtml()
+	{
+		$config_settings = array();
+		$config_settings['redactorStylesJson'] = craft()->config->get('redactorStylesJson');
+		$config_settings['redactorStylesCss'] = craft()->config->get('redactorStylesCss');
+		$config_settings['redactorStylesCssFile'] = craft()->config->get('redactorStylesCssFile');
+
+		return craft()->templates->render('redactorstyles/settings', array(
+			'settings' => $this->getSettings()
+		));
+	}
+
 }

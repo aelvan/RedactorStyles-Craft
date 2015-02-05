@@ -1,9 +1,8 @@
 Redactor Styles for Craft
 ===========
 
-This plugin is a Craft wrapper for the [Styles Redactor plugin by JP Devries](https://github.com/jpdevries/styles).
-
-![Redactor Styles](https://www.modmore.com/assets/uploads/redactor_custom_styles.png)
+This plugin was a Craft wrapper for the [Styles Redactor plugin by JP Devries](https://github.com/jpdevries/styles). 
+It is now reworked to work with the new Redactor 10 API and Craft 2.3+.
 
 
 Usage
@@ -16,30 +15,40 @@ with the different styles you want to add. It may look something like this:
 
     [
         { 
-        "btnName":"Blue text", 
-        "className":"redactor-blue-text", 
-        "spanClass":"blue-text", 
-        "forceBlock": "-1"
+            "btnName":"Blue text", 
+            "className":"blue-text", 
+            "spanClass":"blue-text", 
         },
         { 
-        "btnName":"Indented Text", 
-        "className":"redactor-indented-text", 
-        "wrap":"p", 
-        "spanClass":"indented-text" 
+            "btnName":"Indented Text", 
+            "className":"indented-text", 
+            "spanClass":"indented-text",
+            "forceBlock": 1
+        },
+        { 
+            "btnName":"Code block", 
+            "className":"code", 
+            "spanClass":"code",
+            "wrap":"code",
+            "forceBlock": 1
         }
     ]
 
-Se available options below. If you want inline styles using span (like the first style above), you need to turn off the 
-"Clean up HTML?" option for the field.  
+Se available options below. **If you want inline styles using span (like the first style above), you need to turn off the 
+"Clean up HTML?" option for the field in Craft.**  
 
 In the CSS field you set up any CSS you need to customize the redactor fields in the 
 control panel. Could be somthing like this:
- 
-    .redactor_dropdown .redactor-blue-text,
-    .redactor_editor .blue-text { color: #8acfdd; }
+
+    .redactor-dropdown .redactor-dropdown-blue-text,
+    .redactor-editor .blue-text { color: #8acfdd; }
     
-    .redactor_dropdown .redactor-indented-text, 
-    .redactor_editor .indented-text { text-indent: 3em; }
+    .redactor-dropdown .redactor-dropdown-indented-text, 
+    .redactor-editor .indented-text { text-indent: 3em; }
+
+    .redactor-dropdown .redactor-dropdown-code,
+    .redactor-editor .code { color: #999; font-family: monospace; }
+    .redactor-editor .code { display: block; }
     
 You can alternatively specify an external file for your CSS in the 'Styles CSS File' input field. This needs to be a public path above your web root, so `/css/redactorStyles.css` for example. You can also use `{siteUrl}css/redactorStyles.css` if you are using Craft's [Environment-Specific Variables](http://buildwithcraft.com/docs/multi-environment-configs#environment-specific-variables).
 
@@ -47,10 +56,10 @@ This CSS will be added to the control panel, so you can basicly restyle anything
 here. Staying within the Redactor area, here's how to add more bottom margin to the p tag, and add some other styling 
 to the h3 tag.
  
-    .redactor_box .redactor_editor p { margin-bottom: 16px !important; }
+    .redactor-box .redactor_editor p { margin-bottom: 16px !important; }
     
-    .redactor_box .redactor_editor h3, 
-    .redactor_dropdown .redactor_format_h3 { 
+    .redactor-box .redactor_editor h3, 
+    .redactor-dropdown .redactor-format-h3 { 
         font-size: 14px !important; 
         color: #8acfdd !important; 
         margin-bottom: 0 !important; 
@@ -63,9 +72,9 @@ Here's an example (could be myredactor.json in /craft/config/redactor):
 
     {
 	      buttons: ['formatting','italic','unorderedlist','orderedlist','link','table','html'],
-        formattingTags: ['p', 'h3'],
+        formatting: ['p', 'h3'],
 	      plugins: ['fullscreen', 'styles'],
-	      toolbarFixedBox: true,
+	      toolbarFixed: true,
         stylesJson: RedactorStyles.stylesJson
     }
 
@@ -73,25 +82,20 @@ Here's an example (could be myredactor.json in /craft/config/redactor):
 That's about it.
  
  
-### Options (from [here](https://www.modmore.com/extras/redactor/documentation/creating-custom-formats/#format-options)):
+### Options:
 
 **btnName**: The unique name of the custom format. Required.
 
-**className**: A CSS classname to assign to the associated option in the toolbar. Use to style how the option appears.
+**className**: A CSS classname to assign to the associated option in the dropdown. Used to style how the option appears. Required.
 
-**spanClass**: A class to be applied to the selection. Will be wrapped in a span tag. Must be set if neither wrap or style is set.
+**spanClass**: A class to be applied to the selection. Will be wrapped in a span tag.
 
-**style**: Inline CSS to be applied to the selection. Must be set if neither spanClass or wrap is set.
+**style**: Inline CSS to be applied to the selection. 
 
-**wrap**: HTML tag to wrap the selection in. Must be set if neither spanClass or style is set.
+**wrap**: HTML tag to wrap the selection in.
 
-**forceBlock**: Set to 1,0, or -1 to control whether block or inline wrapping is applied. Defaults to 0. 0 auto determines based on wrap tag. 1 forces block level wrapping. -1 prevents block level wrapping.
+**forceBlock**: Set to 1 to force this to be a block object.
 
-
-
-Known issues
----
-- It seems like the remove formatting option doesn't work that well on inline tags. If someone wants to look into it that, I'd be more than happy. :) 
 
 
 Todo/plans
@@ -102,9 +106,15 @@ Todo/plans
 
 Changelog
 ---
+### Version 0.3
+ - Rewrote plugin to use the Redactor 10 API for Craft 2.3+ support. The plugin now requires Craft 2.3 or newer.
+ - Changed the defaults slightly, forceBlock is now either on or off, no auto. 
+ - The remove format option now works, and remove all formatting from the caret to the bottom block element. 
+ - The classnames in Redactor has changed, updated example CSS.
+ 
+ 
 ### Version 0.2
  - Add ability to use an external css file.
- - 
  
 ---
 ### Version 0.1
