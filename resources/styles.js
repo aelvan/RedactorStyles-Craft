@@ -46,7 +46,7 @@ RedactorPlugins.styles = function () {
 				// add inline wrapper
 				this.inline.format(s.wrap ? s.wrap : 'span');
 				if (s.spanClass) this.inline.toggleClass(s.spanClass);
-				if (s.style) this.inline.setStyleRule(s.style);
+				if (s.style) this.inline.toggleStyle(s.style);
 			}
 			
 		},
