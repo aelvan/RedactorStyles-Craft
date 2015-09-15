@@ -7,7 +7,7 @@ It is now reworked to work with the new Redactor 10 API and Craft 2.3+.
 
 Usage
 ---
-Download the code and put it in a folder named redactorstyles in your craft plugins folder. Go to Settings > Plugins 
+Download the code and put the redactorstyles folder in your craft plugins folder. Go to Settings > Plugins 
 and install it. You can now click on the plugin name to enter the settings.
 
 In the settings you can add content to two fields, "Styles JSON Object" and "Styles CSS". The JSON object is an array 
