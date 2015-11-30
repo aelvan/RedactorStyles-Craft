@@ -1,3 +1,15 @@
+WARNING!!
+==========
+**When updating to Redactor II, Imperavi (the company who created Redactor) broke backwards compability by removing the ability to use <span> tags in
+redactor fields altogether. This means inline styling, for all practical purposes, doesn't work anymore.**
+ 
+**This is very unfortunate, and will break content in Craft that already has <span>'s, when updating to Craft 2.5 and saving entries.
+If you're as pissed about this as I am, I suggest you tweet @imperavi, or email them at hi@imperavi.com, and let them know what an insanely
+stupid move this is. :)**
+
+**This plugin has been rendered pretty useless because of this, so I suggest NOT using it on any new builds.** 
+
+
 Redactor Styles for Craft
 ===========
 
@@ -106,12 +118,14 @@ Todo/plans
 
 Changelog
 ---
+### Version 0.4
+ - Updated plugin to work with Redactor II API for Craft 2.5+ support. **This breaks backwards compability, read warning above.**
+ 
 ### Version 0.3
  - Rewrote plugin to use the Redactor 10 API for Craft 2.3+ support. The plugin now requires Craft 2.3 or newer.
  - Changed the defaults slightly, forceBlock is now either on or off, no auto. 
  - The remove format option now works, and remove all formatting from the caret to the bottom block element. 
  - The classnames in Redactor has changed, updated example CSS.
- 
  
 ### Version 0.2
  - Add ability to use an external css file.

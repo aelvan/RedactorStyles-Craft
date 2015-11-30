@@ -27,28 +27,23 @@ RedactorPlugins.styles = function () {
 			};
 			
 			var button = this.button.add('styles', 'Styles');
-			this.button.setAwesome('styles', 'fa-list-alt');
 			this.button.addDropdown(button, dropdown);
 		},
 		
 		setCustomFormat: function (s) {
-			
 			if ((s.forceBlock == 1 || (s.wrap && !(jQuery.inArray(s.wrap, ['a', 'em', 'strong', 'small', 's', 'cite', 'q', 'dfn', 'abbr', 'data', 'time', 'var', 'samp', 'kbd', 'i', 'b', 'u', 'mark', 'ruby', 'rt', 'rp', 'bdi', 'bdo', 'span', 'sub', 'sup', 'code']) > -1)))) {
-				// add to block level
 				if (s.wrap) {
 					this.block.format(s.wrap);
 				}
 				
-				if (s.spanClass) this.block.setClass(s.spanClass);
-				if (s.style) this.block.setAttr('style', s.style);
+				if (s.spanClass) this.block.addClass(s.spanClass);
+				if (s.style) this.block.addAttr('style', s.style);
 			}
 			else {
-				// add inline wrapper
 				this.inline.format(s.wrap ? s.wrap : 'span');
 				if (s.spanClass) this.inline.toggleClass(s.spanClass);
 				if (s.style) this.inline.toggleStyle(s.style);
 			}
-			
 		},
 		
 		resetCustomFormat: function () {
